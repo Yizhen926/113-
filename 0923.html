@@ -15,7 +15,23 @@
            #id{     }
            .class{  }
         */
-               
+        /*前景:文字顏色(color)
+         背景(background)
+         顏色,圖像(background-color,image)
+         */
+         div{
+            background-color:pink;
+            width:300px;
+            height:500px;
+
+         }
+         /*漸層 not a color, is a image
+         */
+         #d1{
+            background:linear-gradient(purple, pink,blue)
+
+         }
+
     </style>
 </head>
 <body>
@@ -24,6 +40,8 @@
     <span>行內元素</span>
     <span>行內區塊元素</span>
     <span>區塊元素</span>
+    <div id="d1">1</div>
+    <div id="d2">2</div>
 </body>
 
 
