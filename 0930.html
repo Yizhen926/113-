@@ -1,0 +1,101 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>漸層</title>
+    <style>
+        div{
+            width: 500px;
+            height: 100px;
+        }
+        #d1{
+            background: linear-gradient(90deg,lightblue 10%,blue 40%,green 50%,lightgreen 90%); 
+        }
+        #d2{/*線性漸層*/
+            background: repeating-linear-gradient(45deg, violet 13% ,rgb(184, 122, 184) 15% ,white 17%);
+        }
+        #d3{ /*中心圓漸層*/
+            background: radial-gradient(rgb(196, 75, 207),violet, white);
+            height: 500px; 
+        }
+        #d4{/*線性中心圓漸層*/
+            background: repeating-radial-gradient(rgb(196, 75, 207) 10%,violet 13%, white 16%);
+            height: 500px;
+        }
+        #d5{/*圓漸層*/
+            background: conic-gradient(lightblue,violet,white,lightblue);
+            height: 500px;
+        }
+        #d6{/*線性圓漸層*/
+            background: repeating-conic-gradient(lightblue 13%,violet 15%,white 17%);
+            height: 300px;
+        }
+
+        /*動畫*/
+        @keyframes k1{
+            0%{background: linear-gradient(lightblue,violet 50%,white);}
+            12%{background: linear-gradient(lightblue,violet 30%,white);}
+            25%{background: linear-gradient(lightblue,violet 10%,white);}
+            38%{background: linear-gradient(lightblue,violet 30%,white);}
+            50%{background: linear-gradient(lightblue,violet 50%,white);}
+            62%{background: linear-gradient(lightblue,violet 70%,white);}
+            75%{background: linear-gradient(lightblue,violet 90%,white);}
+            58%{background: linear-gradient(lightblue,violet 70%,white);}
+            100%{background: linear-gradient(lightblue,violet 50%,white);}
+        }
+        #a1{
+            animation: k1 0.5s infinite linear;
+        }
+        @keyframes k2{
+            0%{background: linear-gradient(0deg,lightblue,violet ,white);}
+            12%{background: linear-gradient(45deg,lightblue,violet ,white);}
+            25%{background: linear-gradient(90deg,lightblue,violet ,white);}
+            38%{background: linear-gradient(135deg,lightblue,violet ,white);}
+            46%{background: linear-gradient(180deg,lightblue,violet ,white);}
+            50%{background: linear-gradient(225deg,lightblue,violet ,white);}
+            62%{background: linear-gradient(270deg,lightblue,violet ,white);}
+            75%{background: linear-gradient(315deg,lightblue,violet ,white);}   
+            80%{background: linear-gradient(345deg,lightblue,violet ,white);}
+            100%{background: linear-gradient(360deg,lightblue,violet ,white);}  
+        }
+        #a2{
+            animation: k2 0.5s infinite linear;
+        }
+        @keyframes k3{
+            0%{background: repeating-linear-gradient(45deg, violet 13% ,rgb(184, 122, 184) 15% ,white 17%);}
+            50%{background: repeating-linear-gradient(45deg, violet 13% ,rgb(184, 122, 184) 15% ,white 17%);}
+            100%{background: repeating-linear-gradient(45deg, violet 13% ,rgb(184, 122, 184) 15% ,white 17%);}
+        }
+        #a3{
+            animation: k3 0.5s infinite linear;
+        }
+        @keyframes k4{
+            0%{background: radial-gradient(circle,rgb(196, 75, 207),violet 30%, white);}
+            25%{background: radial-gradient(circle,rgb(196, 75, 207),violet 60%, white);}
+            50%{background: radial-gradient(circle,rgb(196, 75, 207),violet 80%, white);}
+            75%{background: radial-gradient(circle,rgb(196, 75, 207),violet 60%, white);}
+            100%{background: radial-gradient(circle,rgb(196, 75, 207),violet 30%, white);}
+        }
+        #a4{
+            animation: k4 0.5s infinite linear;
+        }
+        @keyframes k5{
+
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="d1"></div>
+    <div id="d2"></div>
+    <div id="d3"></div>
+    <div id="d4"></div>
+    <div id="d5"></div>
+    <div id="d6"></div>
+    <div id="a1"></div>
+    <div id="a2"></div>
+    <div id="a3"></div>
+    <div id="a4"></div>
+
+</body>
+</html>
