@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>JS簡介</title>
+        <script>
+            //單行註解
+            /*多行註解*/
+            /*alert("你好!");//跳出訊息
+            console.log("hellow");//主控台訊息*/
+            function f1(){
+                // alert(x);
+                ans=prompt("你是誰?");
+                /*if(confirm("確定嗎")){
+                    console.log("你按了取消");
+                }else{
+                    console.log("你輸入了"+ans);
+                }*/
+               console.log(typeof(ans));
+               if(ans==null) {
+                  console.log("你按了取消");
+
+               } else {
+                console.log("你輸入"+ans);
+               }
+            }
+            function f2(){
+                var a1=document.getElementById("a1").value;
+                var a2=document.getElementById("a2").value;
+                var an=parseInt(a1)+parseInt(a2);
+                document.getElementById("an").value=an;
+                if(an<60) {
+                    document.getElementById("an").style.color="red"
+
+                } else {
+                    document.getElementById("an").style.color="green"
+                }
+                document.getElementById("an").style.backgroundColor='voilet';
+            }
+            function get(id) {
+                return document.getElementById(id);
+
+            }
+           
+            function f3() {
+                var a1=get("a3").value;
+                var a2=get("a4").value;
+                var an=parseInt(a1)+parseInt(a2);
+                get("an1").value=an1;
+                if(an<60) {
+                   get("an1").style.color="red"
+
+                } else {
+                   get("an1").style.color="green"
+                }
+                get("an1").style.backgroundColor='voilet';
+            }
+        </script>
+
+    </head>
+    <body>
+        <input type="number" id="a1">+
+        <input type="number" id="a2">
+        <bottom onclick="f2();">=</bottom>
+        <input type="number" id="an">
+        <input type="number" id="a3">+
+        <input type="number" id="a4">
+        <bottom onclick="f3();">=</bottom>
+        <input type="number" id="an1">
+
+
+
+    </body>
+</html>
