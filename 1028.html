@@ -1,0 +1,77 @@
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>表單控制項</title>
+    
+    <style>
+        input{
+            display: block;
+            margin: 5px 0;
+
+        }
+        #mytext{
+            color: black;
+
+        }
+        
+    </style>
+    <script>
+        function get(id) {
+            return document.getElementById(id);
+        }
+        function changesize(){
+            get("range_num").innerHTML=get("rg_size").value;
+            get("mytext").style.fontSize=get("rg_size").value+"pt";
+        }
+        function changecolor() {
+            get("mytext").style.color=get("color_font").value;
+
+        }
+        function check() {
+            if(get("cb_text").checked) {
+                if(get("usertext").value.length>0){
+                    get("mytext").innerHTML=get("usertext").value;
+                }else {
+                    alert("no text");
+                    get("cb_text").checked=false;
+                }
+             
+
+
+            }else{
+                get("mytext").innerHTML="預設text";
+            }
+        }
+        function getrandnum(min,max){
+            return Math.floor(Math.random()*(max-min+1))+min;
+
+        }
+        function getrand(){
+            setTimeout(clearInterval,3000,
+               setInterval(function(){
+                  get("rand_num").innerHTML=getrandnum(1,99);
+               },10)
+            );
+        }
+          
+
+    </script>
+           
+
+
+    
+</head>
+<body>
+    <div id="mytext">我的文字</div>
+    <input type="text" id="usertext"><input type="checkbox" id="cb_text" oninput="check();">套用<br>
+    <input type="color" id="color_font" oninput="changecolor();"><br>
+    <input type="range" id="rg_size" style="display: inline;" min="0" max="100" value="50" oninput="changesize();">
+    <span id="range_num">50</span>
+    <hr>
+    <div id="rand_num">0</div>
+    <button onclick="getrand();">亂數</button>
+
+
+</body>
+</html>
+   
