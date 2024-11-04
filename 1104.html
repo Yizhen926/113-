@@ -1,0 +1,51 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>1104</title>
+    <style>
+        #num{
+            font-size:50pt;
+        }
+    </style>
+    <script>
+        t1=0
+        function get(id) {
+            return document.getElementById(id);
+        }
+        function getrandnum(min,max){
+            return Math.floor(Math.random()*(max-min+1))+min;
+
+        }
+        function event1() {/*產生亂數*/
+            dice=getrandnum(1,6);
+            /*get("dice").src="pic/"+getrandnum(1,6)+".png"*/
+            get("dice").src=`pic/${dice}.png`;
+            h=getrandnum(0,360);
+            get("msg").style.color=`hsl(${h},80%,30%)`;
+        }
+        function startInterval(){
+            if(t1==0){
+                t1=setInterval(event1,100);
+                setTimeout(stopInterval,1000)
+                get("msg").innerHTML="擲骰中..."
+            }
+        }
+        function stopInterval(){
+            clearInterval(t1);
+            t1=0;
+            get("msg").innerHTML="你的是"+dice+"點"
+
+        }
+
+    </script>
+</head>
+<body>
+    <button onclick="startInterval();">開始</button> 
+    <button onclick="stopInterval();">結束</button>
+    <img id="dice" src="pic/0.png">
+    <div id="msg"></div>
+</body>
+           
+</html>
+
+    
