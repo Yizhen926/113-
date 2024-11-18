@@ -1,0 +1,88 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>1118</title>
+    <style>
+        #timebar{
+            width: 800px;
+            height: 20px;
+            background-color: green;
+        }
+        #board{
+            width: 800px;
+            height: 800px;
+            border: 1px solid gray;
+        }
+        .target{
+            position: absolute;
+            border-radius: 100%;
+        }
+    </style>
+    <script>
+         function get(id) {
+            return document.getElementById(id);
+        }
+        function getrandnum(min,max){
+            return Math.floor(Math.random()*(max-min+1))+min;
+        }
+        function timecountdown(){
+            tbwidth=tbwidth-1;
+            get("timebar").style.width=tbwidth+"px";
+            if(tbwidth<=0){
+                clearInterval(gametimer);
+            }else if(tbwidth<100){
+                get("timebar").style.backgroundColor="red";
+            }else if(tbwidth<200){
+                get("timebar").style.backgroundColor="orange";
+            }
+        }
+        function hittarget(){
+            if(game==false) return;
+            x.event.target;
+            gamescore+=x.score;
+            get("score").innerHTML=gamescore;
+            x.remove();
+        }
+        function newtarget(){
+            var x=document.createElement("div");
+            x.className="target";
+            x.score=getrandnum(1,5);
+            x.pos={x:0,y:0,W:50,h:50};
+            x.pos.w=(6-x.score)*10+20;
+            x.pos.h=x.pos.w;
+            x.pos.x=getrandnum(0,800-x.pos.w);
+            x.pos.y=getrandnum(0,800-x.pos.h);
+            x.style.width=x.pos.w+"px";
+            x.style.height=x.pos.h+"px";
+            x.style.left=x.pos.x+"px";
+            x.style.top=x.pos.y+"px";
+            x.style.backgroundColor=`hsl(${getrandnum(0,360)},80%,50%)`;
+            x.addEventListener("click",hittarget);
+            get("board").appendChild(x);
+        }
+        function gamestart(){
+            gameing=true;
+            gamescore=0;
+            tbwidth=800;
+            gametimer=setInterval(timecountdown,100);
+            targettimer=setInterval(newtarget,1000);
+        }
+        function gamestop(){
+            gameing=false;
+            clearInterval(gametimer);
+            clearInterval(targettimer);
+        } 
+
+
+
+    </script>
+</head>
+<body>
+    <div>得分:<span id="score">0</span></div>
+    <div id="timebar"></div>
+    <div id="board"></div>
+    <button onclick="gamestart()">Start</button>
+    
+
+</body>
+</html>
