@@ -1,0 +1,56 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>1104</title>
+    <style>
+        #world {
+            background: url("pic/grass.jpg");
+            background-size:200px 140px;
+            width: 800px;
+            height: 800px; 
+            position: relative;
+        }
+        @keyframes role1walk {
+            0%{background-position-x:0px ;}
+            100%{background-position-x:-144px;}
+        }
+        #role {
+            background-image: url("sprite1.png");
+            width: 48px;
+            height: 72px;
+            position: absolute;
+            animation :role1walk 1s steps(3) infinite ;
+            background-position-y:-288px ;        }
+    </style>
+    <script>
+        var pos={x:0, y:0};
+        function get(id){
+            return document.getElementById(id);
+        }
+        function mykeydown(){
+            event.preventDefault();
+            if(event.key=="Arrowup"){
+                get("role").style.backgroundPositionY="-216px";
+                pos.y-=5;
+            } else if(event.key=="Arrowdown"){
+                get("role").style.backgroundPositionY="0px";
+                pos.y+=5;
+            } else if(event.key=="Arrowright"){
+                get("role").style.backgroundPositionY="-144px";
+                pos.x+=5;
+            } else if(event.key=="Arrowleft"){
+                get("role").style.backgroundPositionY="-72px";
+                pos.x-=5;
+            }
+            get("mole").style.left=pos.x+"px";
+            get("role").style.top=pos.y+"px";
+        }
+    </script>
+</head>
+<body onkeydown="mykeydown();">
+    <div id="world">
+        <div id="role"></div>
+    </div>
+</body>
+        
+</html>
