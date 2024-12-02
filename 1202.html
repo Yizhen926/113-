@@ -1,0 +1,106 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>1125-角色移動</title>
+    <style>
+        #world {
+            background: url("pic/grass.jpg");
+            background-size:200px 140px;
+            width: 800px;
+            height: 800px; 
+            position: relative;
+        }
+        @keyframes role1walk {
+            0%{background-position-x:0px ;}
+            100%{background-position-x:-144px;}
+        }
+        #role {
+            background-image: url("sprite1.png");
+            width: 48px;
+            height: 72px;
+            position: absolute;
+            animation :role1walk 1s steps(3) infinite ;
+            background-position-y:-288px ;        }
+    </style>
+    <script>
+        function get(id){
+            return document.getElementById(id);
+        }
+        function mykeydown() {
+            event.preventDefault();
+            var bgPY={"ArrowUp":"-216px","ArrowuDown":"0px","ArrowRight":"-144px","ArrowLeft":"-72px"};
+            get("role").style.backgroundPositionY=bgPY[event.key];
+            dir[event.key]=1;
+            get("role").style.animationPlayState="running";
+            /*
+            if(event.key=="Arrowup"){
+                get("role").style.backgroundPositionY="-216px";
+                
+            } else if(event.key=="Arrowdown"){
+                get("role").style.backgroundPositionY="0px";
+                
+            } else if(event.key=="Arrowright"){
+                get("role").style.backgroundPositionY="-144px";
+                
+            } else if(event.key=="Arrowleft"){
+                get("role").style.backgroundPositionY="-72px";
+                
+            }
+        */
+        }
+        function mykeyup() {
+            event.preventDefault();
+            dir[event.key]=0;
+            get("role").style.animationPlayState="paused";
+
+        }
+        function walk() {
+           /* var dx={"Arrowup":0,"Arrowudown":0,"Arrowright":-1,"Arrowleft":1};
+            var dy={"Arrowup":-1,"Arrowudown":1,"Arrowright":0,"Arrowleft":0};
+            pos.x+=dx[dir["now"]];
+            pos.y+=dy[dir["now"]]; */
+            if(dir["ArrowUp"]==1) {
+                pos.y--;
+            } else if(dir["ArrowDown"]==1) {
+                pos.y++;
+            } else if(dir["ArrowLeft"]==1) {
+                pos.x--;
+            } else if(dir["ArrowRight"]==1) {
+                pos.x++;
+            }
+            get("role").style.left=pos.x+"px";
+            get("role").style.top=pos.y+"px";
+
+        }
+        function bgmove(){
+            if(dir["ArrowUp"]==1) {
+                bgpos.y++;
+            } else if(dir["ArrowDown"]==1) {
+                bgpos.y--;
+            } else if(dir["ArrowLeft"]==1) {
+                bgpos.x++;
+            } else if(dir["ArrowRight"]==1) {
+                bgpos.x--;
+            }
+            get("world").style.backgroundPositionX=bgpos.x+"px";
+            get("world").style.backgroundPositionY=bgpos.y+"px";
+
+        }
+        function gameInit(){
+            pos={x:376, y:376};
+            bgpos={x:0, y:0};
+            dir={"ArrowUp":0,"ArrowuDown":0,"ArrowRight":0,"ArrowLeft":0};
+            get("role").style.left=pos.x+"px";
+            get("role").style.top=pos.y+"px";
+            setInterval(bgmove,50);
+
+        }
+    </script>
+</head>
+<body onload="gameInit();" onkeydown="mykeydown();" onkeyup="mykeyon();">
+    <div id="world">
+        <div id="role"></div>
+    </div>
+</body>
+        
+</html>
