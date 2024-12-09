@@ -52,7 +52,7 @@
             mykeys={"ArrowLeft":0,"ArrowRight":0};
             ship={pos:380};
             setInterval(shipmove,1);
-            setInterval(ufocreat,1);
+            setInterval(ufocreate,1);
         }
         function mykeydown(ev) {
             ev.preventDefault();
@@ -69,7 +69,7 @@
             }
         }
         function shipmove() {
-            if(mykeys["ArrowLeft"] && ship.po > 0) {
+            if(mykeys["ArrowLeft"] && ship.pos > 0) {
                 ship.pos--;
             } else if(mykeys["ArrowRight"] && ship.pos <760) {
                 ship.pos++;
@@ -77,15 +77,23 @@
             get("ship").style.left=ship.pos+"px";
         }
         function shoot(){
-            var b=document.createElement("div")
+            var b=document.createElement("div");
             b.className="bullet";
-            b.pos={x:ship.pox+18, y:714}
+            b.pos={x:ship.pox+18, y:714};
             b.style.left=b.pos.x+"px";
             b.life=setInterval(bulletmove,10,b);
             get("space").appendChild(b);
         }
         function bulletmove(b) {
-            
+            var ufos=Array.from(document.getElementsByClassName("ufo")).filter(fuction(u){
+                retur (u.pos.x<this.x && u.pos.x+60>this.x+4) && (u.pos.y+40>=this.y);
+            },b.pos);
+           if (ufos.length>0) {
+               ufos.forEach(function (u){
+                   clearInterval(u.life);
+                   u.remove();
+               });
+           }
             if(b.pos.y <= 0){
                 clearInterval(b.life);
                 b.remove()
