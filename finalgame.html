@@ -30,6 +30,14 @@
         .match {
             background: none;
         }
+        .back,
+        .front{
+            position: absolute;
+            backface-visibility: hidden;
+        }
+        .selected {
+            transform: rotateY(180deg);
+        }
 
 
     </style>
@@ -76,7 +84,7 @@
             const card = document.createElement("div");
             card.classList.add("card");
             card.dataset.name = item.name;
-            card.style.backgroundImage = `url(${item.img})`;
+            card.style.backgroundImage = `url(${back.jpeg})`;
             grid.appendChild(card);
         });
         const array1 = ["a","b","c"];
@@ -120,8 +128,8 @@
                     twoGuess = clicked.dataset.name;
                     clicked.classList.add("selected");
                 }
-                if (firstGuess !== "" && secondGuess !== "") {
-                    if (firstGuess === secondGuess) {
+                if (oneGuess !== "" && twoGuess !== "") {
+                    if (oneGuess === twoGuess) {
                         match();
                     }
                 }
@@ -129,8 +137,8 @@
             previousTarget = clicked;
         });
         const resetGuesses = () => {
-            firstGuess = "";
-            secondGuess = "";
+            oneGuess = "";
+            twoGuess = "";
             count = 0;
         var selected = document.querySelectorAll(".selected");
             selected.forEach(card => {
@@ -139,26 +147,49 @@
         };
         grid.addEventListener("click", function(event) {
             //...
-            if (firstGuess === secondGuess) {
+            if (oneGuess === twoGuess) {
                 match();
                 resetGuesses();
             } else {
                 resetGuesses();
             }
         }
+        );
+        gameGrid.forEach(item =>{
+            const card = document.createElement("div");
+            card.classList.add("card");
+            card.dataset.name = item.name;
+
+            const front= document.createElement("div");
+            front.classList.add("front");
+            
+            const back = document.createElement("div");
+            back.classList.add("back");
+            back.style.backgroundImage=`url(${back.jpeg})`;
+
+            grid.appendChild(card);
+            card.appendChild(front);
+            card.appendChild(back);
+
+            grid.addEventListener("click", function(event) {
+                if (count === 1) {
+                    oneGuess = clicked.parentNode.dataset.name;
+                    console.log(oneGuess);
+                    clicked.parentNode.classList.add("selected");
+                } else {
+                    twoGuess = clicked.parentNode.dataset.name;
+                    console.log(twoGuess);
+                    clicked.parentNode.classList.add("selected");
+                }
+                //...
+                });
         });
-        
-
-
-
     </script>
 
 
 </head>
 <body>
-    <div id="timebar"></div>
     <div id="space"></div>
-    <button onclick="start">開始</button>
     <div id="game"></div>
 </body>
 </html>
