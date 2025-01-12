@@ -35,66 +35,64 @@
             position: absolute;
             backface-visibility: hidden;
         }
-        .selected {
-            transform: rotateY(180deg);
-        }
 
 
     </style>
     <script>
         function get(id){
             return document.getElementById(id);
-        }
-        function getrandnum(min,max){
-            return Math.floor(Math.random()*(max-min+1))+min;
-        }
-        
-        const cardsArray= [
-            {
-                name :"one",
-                jpeg :"fp/1.png"
-            },
-            {
-                name :"two",
-                jpeg :"fp/2.png"
-            },
-            {
-                name :"three",
-                jpeg :"fp/3.png "
-            },
-            {
-                name :"four",
-                jpeg :"fp/4.png "
-            },
-            {
-                name :"five",
-                jpeg :"fp/5.png "
-            },
-            {
-                name :"six",
-                jpeg :"fp/6.png "
-            },
-        ]
-        const game = document.getElementById("game");
-        const grid = document.createElement('section');
-        grid.setAttribute("class","grid");
-        game.appendChild(grid)
+        } 
+        gameGrid.forEach(item =>{
 
+        const cardsArray = [
+            {
+                name: "spade",
+                img: "img/spade.jpeg"
+
+            },
+            {
+                name: "two",
+                img: "img/two.png"
+            },
+            {
+                name: "three",
+                img: "img/three.png"
+            },
+            {
+                name: "four",
+                img: "img/four.png"
+            },
+            {
+                name: "five",
+                img: "img/five.jpg"
+            },
+            {
+                name: "ten",
+                img: "img/ten.png"
+            },
+        ]; 
+      
+        const game = document.getElementById("game");
+        const grid = document.createElement("section");
+        grid.setAttribute("class", "grid");
+        game.appendChild(grid);
         cardsArray.forEach(item => {
             const card = document.createElement("div");
             card.classList.add("card");
             card.dataset.name = item.name;
-            card.style.backgroundImage = `url(${back.jpeg})`;
+            card.style.backgroundImage = `url(${item.img})`;
             grid.appendChild(card);
         });
+
         const array1 = ["a","b","c"];
         const array2 = ["d","e","f"];
         conscol.log(array1.concat(array2));
 
         var gameGrid = cardsArray.const(cardsArray).sort(function(){
-            return 0.5- Math.random();
+            return 0.5 - Math.random();        
         });
-        gameGrid.forEach(item =>{})
+
+        })
         grid.addEventListener("click", function(event) {
             let clicked = event.target;
             if (clicked.nodeName === "SECTION") {
