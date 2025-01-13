@@ -1,0 +1,184 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>期末作業</title>
+    <style>
+        html{
+            height: 1000px;
+            width: 1000px;
+        }
+        body,button,html,input,select {
+            font-family: Roundhand;
+        }
+        .btn:hover {
+            cursor: pointer;
+        }
+        .btn-ttt{
+            border-radius: 5px;
+            font-size: 35px;
+            color: violet;
+            font-weight: normal;
+            padding: 10px 20px;
+            margin: 5px 2px;
+            width: 80px;
+            height: 80px;
+
+        }
+        .reset{
+            border: 5px;
+            border-radius:10px ;
+            font-size: 24px;
+            color: blueviolet;
+            font-weight: normal;
+            padding: 10px 20px;
+            margin: 5px 2px;
+            width: 120px;
+            height: 60px;
+        }
+        ol li {
+            font-size: 24px;
+        }
+        .result{
+            color: rgb(127, 118, 248);
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+    </style>
+    <script>
+        var buttons = document.querySelectorAll('[id^="btnN"]')
+        var ttt = [" "," "," "," "," "," "," "," "," ",];
+        var winLines = [
+            [0,1,2],[3,4,5],[6,7,8,],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]
+        ];
+        var current ="O";
+        var endOrNot = new Boolean(false);
+        var total =0;
+
+        buttons.forEach(function(abtn){
+            abtn.style.backgroundColor =" #edd1ff";
+            abtn.addEventListener('click',function() { markSpace(abtn.id);})
+        })
+        
+
+        reset.addEventListener('click',function(){
+        var i = 1;
+        endOrNot =false;
+        current = 'O';
+
+        for ( i=0; i<9 ;i++) {ttt[i]=' ';}
+        btnN1.style.backgroundColor =" #edd1ff";
+        btnN2.style.backgroundColor =" #edd1ff";
+        btnN3.style.backgroundColor =" #edd1ff";
+        btnN4.style.backgroundColor =" #edd1ff";
+        btnN5.style.backgroundColor =" #edd1ff";
+        btnN6.style.backgroundColor =" #edd1ff";
+        btnN7.style.backgroundColor =" #edd1ff";
+        btnN8.style.backgroundColor =" #edd1ff";
+        btnN9.style.backgroundColor =" #edd1ff";
+
+        btnN1.innerText = " ";
+        btnN2.innerText = " ";
+        btnN3.innerText = " ";
+        btnN4.innerText = " ";
+        btnN5.innerText = " ";
+        btnN6.innerText = " ";
+        btnN7.innerText = " ";
+        btnN8.innerText = " ";
+        btnN9.innerText = " ";
+
+        total =0;
+
+        document.getElementById("result"),innerHTML="結果";
+    });
+
+    function markSpace(btnID)
+    {
+        if (endOrNot == true){return 0;}
+
+        if (current == 'O'){
+            var abtn = document.getElementById(btnID);
+            var pos = parseInt(btnID[4])-1;
+
+            if (ttt[pos]==''){
+                ttt[pos] = "O";
+                abtn.style.backgroundColor='#8e68ed';
+                abtn.innerText = "O";
+                current ='X';
+                total++;
+            }
+        }
+        check();
+        if (endOrNot==true){return 0;}
+
+        while (true){
+            pos =randInt(0,8)
+            if(ttt[pos]==""){
+                btnID="btnN"+(pos+1);
+                abtn = document.getElementById(btnID);
+                ttt[pos]='X';
+                abtn.style.backgroundColor="#ed6868";
+                abtn.innerText="X";
+                current="O";
+                total++;
+                break;
+            }
+
+        }
+
+    }
+    function randInt(start){
+        return Math.floor(Math.random()* (end - start +1)) + start;
+    }
+    
+
+
+    function check(){
+        var ri,ci;
+        var winOrNot = new Boolean(true);
+        for (ri=0;ri<8;ri++){
+            winOrNot = true;
+            for(ci=1;ci<3;ci++){
+                if (ttt[winLines[ri][ci]]==0){winOrNot=false;break;}
+                if(ttt[winLines[ti][ci]]!=ttt[winLines[ri][ci-1]]) {winOrNot=false;break;}
+            }
+            if(winOrNot==true){
+                if(ttt[winLines[ri][0]]=='O'){document.getElementById("result").innerText="You Win!!!";}
+                else {document.getElementById("result").innerHTML="You lose...";}
+
+                endOrNot=true ;
+            }
+            if(total=9){document.getElementById("result").innerHTML="Try again!"; endOrNot =true;}
+
+        }
+    }
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h1>井字遊戲</h1>
+    </div>
+    <div id="container">
+        <div class="row mt-4">
+            <div class="col-lg-4">
+                <button type="button" id="btnN1" class="btn btn-ttt">&nbsp</button>
+                <button type="button" id="btnN2" class="btn btn-ttt">&nbsp</button>
+                <button type="button" id="btn3" class="btn btn-ttt">&nbsp</button>
+                <br>
+                <button type="button" id="btnN4" class="btn btn-ttt">&nbsp</button>
+                <button type="button" id="btnN5" class="btn btn-ttt">&nbsp</button>
+                <button type="button" id="btnN6" class="btn btn-ttt">&nbsp</button>
+                <br>
+                <button type="button" id="btnN7" class="btn btn-ttt">&nbsp</button>
+                <button type="button" id="btnN8" class="btn btn-ttt">&nbsp</button>
+                <button type="button" id="btnN9" class="btn btn-ttt">&nbsp</button>
+            </div>
+            <div class="col-lg-4">
+                <p id="result" class="result">結果</p>
+                <button type="button" id='reset' class='reset'>重置</button>
+            </div>
+        </div>
+    </div>
+</body>
+        
+</html>
